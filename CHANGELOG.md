@@ -4,6 +4,23 @@ All notable changes to `phil/access-bundle` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](https://keepachangelog.com/) principles.
 
+## 0.2.1-alpha - 2026-11-18
+
+The next version is 0.2.1-alpha: every tenant can be purged in one run.
+
+### Added
+
+- `phil:access:purge --all-tenants`: each tenant whose partition holds tuples entered in turn through the tenant
+  context, purged and left, even when its purge fails; a report per tenant, and exit `1` when one failed. Refused
+  when the tuples are not partitioned by tenant, with `--tenant`, or without a list of partitions.
+  `Application\Contract\TuplePartitions`, the partitions that hold tuples, and `Infrastructure\Dbal\DbalTuplePartitions`,
+  its default with the DBAL store.
+- The documentation of purging every tenant.
+
+### Changed
+
+- The README says that organizations and their roles come from `phil/organizations-bundle`, now published.
+
 ## 0.2.0-alpha - 2026-11-17
 
 The next version is 0.2.0-alpha: "view as this member" stays within the admin's space and is read-only for the whole
