@@ -4,9 +4,28 @@ All notable changes to `phil/access-bundle` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](https://keepachangelog.com/) principles.
 
+## 0.2.2-alpha - 2026-11-25
+
+### Changed
+
+- Requires the latest minor of each dependency (`doctrine/dbal` 4.6, `twig/twig` 3.31, `symfony/ux-twig-component`
+  3.8), and of each development requirement (`doctrine/orm` 3.8, `easycorp/easyadmin-bundle` 5.10, `phil/ux-kit` 0.5,
+  `symfony/dom-crawler` 8.2).
+- The development requirements take `easycorp/easyadmin-bundle` 5.10.4 or later, the release that fixes
+  GHSA-rrpv-c5fp-ppxr, an autocomplete that used fields and pages the user may not see, and GHSA-jqfc-9phg-ghr7, crafted
+  links that changed the target of the delete buttons and boolean toggles. EasyAdmin then checks the entity permission
+  of an autocomplete with a `null` subject on the `new` page, which `AccessVoter` does not grant:
+  [EasyAdmin](doc/easyadmin.md) shows the expression that keeps those fields.
+
+### Security
+
+- Requires `twig/twig` 3.31.1 or later, which fixes the advisories of its sandbox published on 2026-11-24.
+- Conflicts with `easycorp/easyadmin-bundle` below 5.10.4, the release that fixes GHSA-rrpv-c5fp-ppxr and
+  GHSA-jqfc-9phg-ghr7: an application cannot install this bundle next to a vulnerable EasyAdmin, which stays optional.
+
 ## 0.2.1-alpha - 2026-11-18
 
-The next version is 0.2.1-alpha: every tenant can be purged in one run.
+Every tenant can be purged in one run.
 
 ### Added
 
@@ -23,7 +42,7 @@ The next version is 0.2.1-alpha: every tenant can be purged in one run.
 
 ## 0.2.0-alpha - 2026-11-17
 
-The next version is 0.2.0-alpha: "view as this member" stays within the admin's space and is read-only for the whole
+"View as this member" stays within the admin's space and is read-only for the whole
 application, and the tuples are partitioned by tenant. See [Upgrading from 0.1](doc/tenants.md#upgrading-from-01).
 
 ### Added
